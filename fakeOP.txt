@@ -1,0 +1,14 @@
+ const images = [
+      'https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/a57-en/navigation/A57-427x600-green.png.thumb.webp',
+      'https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/a96-en/navigation/A96-navigation-black.png.thumb.webp',
+      'https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/f17-a73/navigation/A73-F17-navigation-blue-v2.png.thumb.webp',
+      'https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/navigation/a-series/a92-a72/A92-A72-navigation-Black-v2.png.thumb.webp',
+      'https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/navigation/a-series/a31/A31-navigation-Black-v2.png.thumb.webp'
+   ]
+   const names = [
+      'OPPO Find X2 Pro',
+      'OPPO Reno7',
+      'OPPO Reno4',
+      'OPPO A57',
+      'OPPO A16'
+   ]

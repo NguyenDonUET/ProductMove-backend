@@ -37,6 +37,31 @@ const getAllProducts = async (req, res) => {
    }
 }
 
+const getFilterProducts = async (req, res) => {
+   const queryObj = { ...req.query }
+   const { page = 1, limit = 10 } = req.query
+   const excludeFields = ['page', 'sort', 'limit', 'fields']
+   excludeFields.forEach(el => delete queryObj[el])
+   // advance filter: chỉ lấy những value >, <, >=, <=
+   let queryStr = JSON.stringify(queryObj).replaceAll(
+      /\b(gte|gt|lte|lt)\b/g,
+      match => `$${match}`
+   )
+   // phan trang
+   const start = (page - 1) * limit
+   const result = await Product.find(JSON.parse(queryStr))
+   const data = await Product.find(JSON.parse(queryStr))
+      .skip(start)
+      .limit(limit)
+   const numPages = Math.ceil(result.length / 10)
+   res.status(200).json({
+      numPages,
+      sizeResult: result.length,
+      dataLen: data.length,
+      data
+   })
+}
+
 // const paginateProducts = async (req, res) => {
 //    const currentPage = parseInt(req.query.page) || 1
 //    // số page bỏ qua
@@ -113,5 +138,6 @@ module.exports = {
    getProduct,
    createProduct,
    updateProduct,
-   deleteProduct
+   deleteProduct,
+   getFilterProducts
 }
