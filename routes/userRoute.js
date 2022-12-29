@@ -1,11 +1,18 @@
 const express = require('express')
 const {
+   protect,
+   restrictTo,
+   forgotPassword,
+   resetPassword
+} = require('../controller/authoController')
+const {
    createUser,
    loginUser,
    logout,
    getUsers,
    deleteUser,
-   updateUser
+   updateUser,
+   loginStatus
 } = require('../controller/userController')
 const User = require('../models/userModel')
 
@@ -25,12 +32,18 @@ router.get('/removeAll', async (req, res) => {
       })
    }
 })
+router.post('/forgotPassword', forgotPassword)
+router.patch('/resetPassword/:token', resetPassword)
 
-router.get('/getUsers', getUsers)
-router.post('/register', createUser)
 router.post('/login', loginUser)
 router.get('/logout', logout)
+
+router.get('/getLogin', loginStatus)
+
+router.post('/register', createUser)
+router.get('/getUsers', getUsers)
+
 router.delete('/:id', deleteUser)
-router.patch('/:id', updateUser)
+router.patch('/:id', protect, updateUser)
 
 module.exports = router
